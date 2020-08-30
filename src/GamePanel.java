@@ -28,6 +28,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     Font endFontTwo;
     
     Timer frameDraw;
+    
+    Player player = new Player(250, 700, 50, 50);
 	
 	GamePanel(){
 		titleFont = new Font("Arial", Font.BOLD, 48);
@@ -57,15 +59,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		}
 
 	}
-	
-	//public boolean contains(int x) {
-	//	for(int i = 0;i<LEVELS.length;i++) {
-	//		if(LEVELS[i]==x) {
-	//			return true;
-	//		}	
-	//	}
-		
-//	}
+
 	
 	//updates game states
 	void updateMenu() {
@@ -89,7 +83,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		g.setFont(titleFontTwo);
 		g.setColor(Color.BLUE);
-		g.drawString("HOW TO PLAY:", 120, 200);
+		g.drawString("HOW TO PLAY:", 250, 200);
 		
 		g.setFont(titleFontThree);
 		g.setColor(Color.BLUE);
