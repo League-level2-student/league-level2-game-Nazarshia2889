@@ -4,12 +4,12 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Bush extends GameObject{
+public class Vaccine extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	
-	Bush(int x, int y, int width, int height){
+	Vaccine(int x, int y, int width, int height){
 		super(x, y, width, height);
 		if(needImage) {
 			loadImage("bush.png");

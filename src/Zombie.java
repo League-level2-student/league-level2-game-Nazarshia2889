@@ -13,7 +13,7 @@ public class Zombie extends GameObject{
 		super(x, y, width, height);
 		speed = 5;
 		if (needImage) {
-		    loadImage ("zombie.png");
+		    loadImage ("zombie.gif");
 		}
 	}
 	

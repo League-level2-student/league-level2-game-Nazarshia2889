@@ -10,14 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
-	final int MENU = 0;
-	final int LEVELONE = 1;
-	final int LEVELTWO = 2;
-	final int LEVELTHREE = 3;
-	final int LEVELFOUR = 4;
-	final int LEVELFIVE = 5;
-	final int END = 6;
-	int currentState = MENU;
+	final static int MENU = 0;
+	final static int LEVELONE = 1;
+	final static int LEVELTWO = 2;
+	final static int LEVELTHREE = 3;
+	final static int LEVELFOUR = 4;
+	final static int LEVELFIVE = 5;
+	final static int END = 6;
+	static int currentState = MENU;
 	
 	Font titleFont;
     Font titleFontTwo;
@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.drawString("Bushes can also help! Zombies will come after you,", 50, 500);
 		g.drawString("stand on the bushes to hide for them to go by without", 50, 550);
 		g.drawString("seeing you. Play through each level and find the cure", 50, 600);
-		g.drawString("to the zombie virus and complete the game!", 50, 650);
+		g.drawString("to the zombie virus, and complete the game!", 50, 650);
 		g.setFont(titleFontThree);
 		g.setColor(Color.ORANGE);
 		g.drawString("Press ENTER to start", 80, 750);
