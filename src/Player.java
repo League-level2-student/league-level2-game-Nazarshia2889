@@ -47,7 +47,7 @@ public class Player extends GameObject{
 				if(y > 0) {
 					finishedLevel = false;
 				}
-				if(y < 0) {
+				else if(y <= 0) {
 					finishedLevel = true;
 				}
 				
