@@ -12,7 +12,7 @@ public class Bush extends GameObject{
 	Bush(int x, int y, int width, int height){
 		super(x, y, width, height);
 		if(needImage) {
-			loadImage("bush.png");
+			loadImage("bushes.png");
 		}
 	}
 	
@@ -37,4 +37,8 @@ public class Bush extends GameObject{
 		        needImage = false;
 		    }
 		}
+	 
+	 void update(){
+		 super.update();
+	 }
 }

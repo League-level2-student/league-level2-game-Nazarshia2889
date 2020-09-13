@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,8 +30,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     Font endFontTwo;
     
     Timer frameDraw;
+    Timer zombieSpawn;
     
-    Player player = new Player(250, 700, 50, 50);
+    Player player = new Player(250, 700, 125, 125);
+    ObjectManager objects = new ObjectManager(player);
+    
+    public static BufferedImage image;
+    public static boolean needImage = true;
+    public static boolean gotImage = false;
 	
 	GamePanel(){
 		titleFont = new Font("Arial", Font.BOLD, 48);
@@ -42,6 +50,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     	
     	frameDraw = new Timer(1000/60, this);
     	frameDraw.restart();
+    	
+    	if (needImage) {
+    	    loadImage("Grass.jpg");
+    	}
 	}
 	
 	
@@ -66,7 +78,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	void updateLevels() {
-		
+		if(player.isActive == false) {
+			currentState = END;
+		}
+		else if(player.isActive = true) {
+			player.update();
+			objects.update();
+		}
 	}
 	void updateEnd() {
 		
@@ -100,6 +118,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	void drawLevels(Graphics g){
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+		if (gotImage) {
+			g.drawImage(image, 0, 0, Cure.WIDTH, Cure.HEIGHT, null);
+		} else {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+		}
+		
+		objects.draw(g);
 	}
 	void drawEnd(Graphics g) {
 		g.setColor(Color.RED);
@@ -122,6 +148,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		repaint();
 	}
+	
+	void startGame() {
+		if(currentState == 1) {
+			zombieSpawn = new Timer(5000, objects);
+			zombieSpawn.start();
+		}
+		if(currentState == 2) {
+			zombieSpawn = new Timer(3000, objects);
+			zombieSpawn.start();
+		}
+		if(currentState == 3) {
+			zombieSpawn = new Timer(2000, objects);
+			zombieSpawn.start();
+		}
+		if(currentState == 4) {
+			zombieSpawn = new Timer(1000, objects);
+			zombieSpawn.start();
+		}
+		if(currentState == 5) {
+			zombieSpawn = new Timer(500, objects);
+			zombieSpawn.start();
+		}
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -136,16 +185,96 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		    if (currentState == END) {
 		        currentState = MENU;
 		    } 
-		    else {
-		        currentState++;
+		    if(currentState == MENU) {
+		    	currentState++;
+		    }
+		if(player.finishedLevel = true){
+		    currentState++;
+		    player.finishedLevel = false;
+		    if(currentState == 1)  {
+		    	startGame();
+		    	objects.addBush();
+		    }
+		    else if(currentState == 2) {
+		    	startGame();
+		    	objects.addBush();
+		    	Player player = new Player(250, 700, 125, 125);
+		    	ObjectManager objects = new ObjectManager(player);
+		    }
+		    else if(currentState == 3) {
+		    	startGame();
+		    	objects.addBush();
+		    	Player player = new Player(250, 700, 125, 125);
+		    	ObjectManager objects = new ObjectManager(player);
+		    }
+		    else if(currentState == 4) {
+		    	startGame();
+		    	objects.addBush();
+		    	Player player = new Player(250, 700, 125, 125);
+		    	ObjectManager objects = new ObjectManager(player);
+		    }
+		    else if(currentState == 5) {
+		    	startGame();
+		    	objects.addBush();
+		    	Player player = new Player(250, 700, 125, 125);
+		    	ObjectManager objects = new ObjectManager(player);
+		    }
+		    
+		    else if(currentState == END) {
+		    }
+		    else if(currentState == MENU) {
+		    }
 		    }
 		}   
+		if(currentState == 1 || currentState == 2 || currentState == 3 || currentState == 4 || currentState == 5) {
+			if (e.getKeyCode()==KeyEvent.VK_UP) {
+				player.up = true;
+			}
+			else if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+				player.down = true;
+			}
+			else if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+				player.right = true;
+			}
+			else if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+				player.left = true;
+			}
+			
+		}
+	if(currentState == END) {
+		zombieSpawn.stop();
+	}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (e.getKeyCode()==KeyEvent.VK_UP) {
+			player.up = false;
+		}
+		else if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+			player.down = false;
+		}
+		else if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			player.right = false;
+		}
+		else if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+			player.left = false;
+		}
+	}
+	
+
+	void loadImage(String imageFile) {
+	    if (needImage) {
+	        try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+	    }
 	}
 	
 }

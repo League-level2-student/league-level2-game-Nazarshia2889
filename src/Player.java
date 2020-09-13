@@ -9,7 +9,7 @@ public class Player extends GameObject{
 	boolean down = false;
 	boolean left = false;
 	boolean right = false;
-	boolean finishedLevel = false;
+	public boolean finishedLevel = false;
 	
 	public static int px = 0;
 	public static int py = 0;
@@ -22,7 +22,7 @@ public class Player extends GameObject{
 	
 	Player(int x, int y, int width, int height){
 		super(x, y, width, height);
-		speed = 10;
+		speed = 5;
 		if(needImage) {
 			loadImage("pixil-frame-0.png");
 		}
@@ -43,12 +43,14 @@ public class Player extends GameObject{
 		px = x;
 		py = y;
 			if(up == true) {
+				up();
 				if(y > 0) {
-					up();
+					finishedLevel = false;
 				}
-				else if(y < 0) {
+				if(y < 0) {
 					finishedLevel = true;
 				}
+				
 			}
 			else if(down == true) {
 				if(y < Cure.HEIGHT - 75) {

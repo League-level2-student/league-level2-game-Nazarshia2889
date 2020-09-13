@@ -11,7 +11,7 @@ public class Zombie extends GameObject{
 	
 	Zombie(int x, int y, int width, int height){
 		super(x, y, width, height);
-		speed = 5;
+		speed = 1;
 		if (needImage) {
 		    loadImage ("zombie.gif");
 		}
@@ -33,7 +33,7 @@ public class Zombie extends GameObject{
 				y -= speed;
 			}
 		}
-		else {
+		else if(Player.inBush == true){
 			y += speed;
 		}
 	}
