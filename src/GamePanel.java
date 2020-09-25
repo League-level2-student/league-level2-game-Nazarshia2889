@@ -126,6 +126,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		}
 		
 		objects.draw(g);
+		
+		
 	}
 	void drawEnd(Graphics g) {
 		g.setColor(Color.RED);
@@ -147,30 +149,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		
 		repaint();
+		
 	}
 	
-	void startGame() {
-		if(currentState == 1) {
-			zombieSpawn = new Timer(5000, objects);
-			zombieSpawn.start();
-		}
-		if(currentState == 2) {
-			zombieSpawn = new Timer(3000, objects);
-			zombieSpawn.start();
-		}
-		if(currentState == 3) {
-			zombieSpawn = new Timer(2000, objects);
-			zombieSpawn.start();
-		}
-		if(currentState == 4) {
-			zombieSpawn = new Timer(1000, objects);
-			zombieSpawn.start();
-		}
-		if(currentState == 5) {
-			zombieSpawn = new Timer(500, objects);
-			zombieSpawn.start();
-		}
+	void startGameLevelOne() {
+		zombieSpawn = new Timer(5000, objects);
+		zombieSpawn.start();
 	}
+		
+	void startGameLevelTwo() {
+		zombieSpawn = new Timer(3000, objects);
+		zombieSpawn.start();
+	}
+		
+	void startGameLevelThree() {
+		zombieSpawn = new Timer(2000, objects);
+		zombieSpawn.start();
+	}
+		
+	void startGameLevelFour() {
+		zombieSpawn = new Timer(1000, objects);
+		zombieSpawn.start();
+	}
+	void startGameLevelFive() {
+		zombieSpawn = new Timer(500, objects);
+		zombieSpawn.start();
+	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -188,44 +193,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		    if(currentState == MENU) {
 		    	currentState++;
 		    }
-		if(player.finishedLevel = true){
-		    currentState++;
-		    player.finishedLevel = false;
-		    if(currentState == 1)  {
-		    	startGame();
-		    	objects.addBush();
-		    }
-		    else if(currentState == 2) {
-		    	startGame();
-		    	objects.addBush();
-		    	Player player = new Player(250, 700, 125, 125);
-		    	ObjectManager objects = new ObjectManager(player);
-		    }
-		    else if(currentState == 3) {
-		    	startGame();
-		    	objects.addBush();
-		    	Player player = new Player(250, 700, 125, 125);
-		    	ObjectManager objects = new ObjectManager(player);
-		    }
-		    else if(currentState == 4) {
-		    	startGame();
-		    	objects.addBush();
-		    	Player player = new Player(250, 700, 125, 125);
-		    	ObjectManager objects = new ObjectManager(player);
-		    }
-		    else if(currentState == 5) {
-		    	startGame();
-		    	objects.addBush();
-		    	Player player = new Player(250, 700, 125, 125);
-		    	ObjectManager objects = new ObjectManager(player);
-		    }
-		    
-		    else if(currentState == END) {
-		    }
-		    else if(currentState == MENU) {
-		    }
-		    }
-		}   
+		}
+		
+		 
+		
 		if(currentState == 1 || currentState == 2 || currentState == 3 || currentState == 4 || currentState == 5) {
 			if (e.getKeyCode()==KeyEvent.VK_UP) {
 				player.up = true;
@@ -241,9 +212,65 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			}
 			
 		}
-	if(currentState == END) {
-		zombieSpawn.stop();
-	}
+		
+		if(player.finishedLevel == true){
+			currentState = currentState + 1;
+			player.finishedLevel = false;
+		}
+		
+		if(currentState == 1)  {
+			   startGameLevelOne();
+			   objects.addBushLevelOne();
+			    }
+		else if(currentState == 2) {
+				zombieSpawn.stop();
+				objects.bushes.clear();
+				objects.zombies.clear();
+				player.x = 250;
+			    player.y = 700;
+				startGameLevelTwo();
+			    objects.addBushLevelTwo();
+			    
+			    
+				}
+		else if(currentState == 3) {
+				objects.bushes.clear();
+				objects.zombies.clear();
+				zombieSpawn.stop();
+				startGameLevelThree();
+			    objects.addBushLevelThree();
+			    player.x = 250;
+			    player.y = 700;
+			    }
+		else if(currentState == 4) {
+				objects.bushes.clear();
+				objects.zombies.clear();
+				zombieSpawn.stop();
+			    startGameLevelFour();
+			    objects.addBushLevelFour();
+			    player.x = 250;
+			    player.y = 700;
+			    }
+		else if(currentState == 5) {
+				objects.bushes.clear();
+				objects.zombies.clear();
+				zombieSpawn.stop();
+		    	startGameLevelFive();
+		    	objects.addBushLevelFive();
+		    	player.x = 250;
+			    player.y = 700;
+			    }
+			    
+		else if(currentState == END) {
+			    }
+		else if(currentState == MENU) {
+			    }
+		
+		
+		
+		if(currentState == END) {
+			zombieSpawn.stop();
+		}
 
 	}
 

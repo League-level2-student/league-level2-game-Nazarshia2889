@@ -20,7 +20,7 @@ public class GameObject {
 	}
 	
 	void update() {
-		collisionBox.setBounds(x, y, width, height);
+		collisionBox.setBounds(x, y, width-50, height-50);
 	}
 	
 	

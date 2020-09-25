@@ -44,13 +44,6 @@ public class Player extends GameObject{
 		py = y;
 			if(up == true) {
 				up();
-				if(y > 0) {
-					finishedLevel = false;
-				}
-				else if(y <= 0) {
-					finishedLevel = true;
-				}
-				
 			}
 			else if(down == true) {
 				if(y < Cure.HEIGHT - 75) {
@@ -66,6 +59,11 @@ public class Player extends GameObject{
 				if(x < Cure.WIDTH - 40) {
 					right();
 				}
+			}
+			
+			if(y <= 0) {
+				finishedLevel = true;
+				System.out.println("finished level");
 			}
 		}
 	

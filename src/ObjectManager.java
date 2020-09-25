@@ -15,32 +15,33 @@ public class ObjectManager implements ActionListener{
 		this.player = player;
 	}
 	
-	void addBush() {
-		if(GamePanel.currentState == 1) {
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-		}
-		if(GamePanel.currentState == 2) {
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-		}
-		if(GamePanel.currentState == 3) {
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-		}
-		if(GamePanel.currentState == 4) {
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-		}
-		if(GamePanel.currentState == 5) {
-			bushes.add(new Bush(random.nextInt(Cure.WIDTH), random.nextInt(Cure.HEIGHT), 350, 200));
-		}
+	void addBushLevelOne() {
+		bushes.add(new Bush(5, 100, 350, 200));
+		bushes.add(new Bush(5, 400, 350, 200));
+		bushes.add(new Bush(400, 100, 350, 200));
+		bushes.add(new Bush(400, 400, 350, 200));
 	}
+	void addBushLevelTwo() {
+		bushes.add(new Bush(200, 250, 350, 200));
+		bushes.add(new Bush(600, 250, 350, 200));
+		bushes.add(new Bush(400, 500, 350, 200));
+			
+	}
+		
+	void addBushLevelThree() {
+		bushes.add(new Bush(200, 800, 350, 200));
+		bushes.add(new Bush(600, 200, 350, 200));
+	}
+		
+	void addBushLevelFour() {
+		bushes.add(new Bush(200, 500, 350, 200));
+		bushes.add(new Bush(600, 500, 350, 200));
+	}
+	
+	void addBushLevelFive() {
+		bushes.add(new Bush(400, 500, 350, 200));
+	}
+	
 	
 	void addZombie() {
 		zombies.add(new Zombie((random.nextInt(Cure.WIDTH)), 0, 100, 100));
@@ -95,6 +96,10 @@ public class ObjectManager implements ActionListener{
 		}
 	}
 	
+	void resetPlayer() {
+		player = null;
+	}
+	
 	void checkCollision() {
 		for(int i = 0;i<zombies.size();i++) {
 			Zombie s = zombies.get(i);
@@ -103,15 +108,16 @@ public class ObjectManager implements ActionListener{
 				s.isActive = false;
 			}		
 		}
+		boolean isInBush = false;
+		
 		for(int i = 0;i<bushes.size();i++) {
 			Bush s = bushes.get(i);
 			if(player.collisionBox.intersects(s.collisionBox)) {
-				player.inBush = true;
-			}
-			else {
-				player.inBush = false;
+				isInBush = true;
+				break;
 			}
 		}
+		player.inBush = isInBush;
 	}
 
 	@Override
