@@ -19,6 +19,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	final static int LEVELFOUR = 4;
 	final static int LEVELFIVE = 5;
 	final static int END = 6;
+	final static int GAMEOVER = 7;
+	
 	static int currentState = MENU;
 	
 	Font titleFont;
@@ -52,7 +54,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     	frameDraw.restart();
     	
     	if (needImage) {
-    	    loadImage("Grass.jpg");
+    	    loadImage("grass.jpg");
     	}
 	}
 	
@@ -69,6 +71,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		else if(currentState == END) {
 			drawEnd(g);
 		}
+		else if(currentState == GAMEOVER) {
+			drawGameOver(g);
+		}
 
 	}
 
@@ -81,9 +86,51 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		if(player.isActive == false) {
 			currentState = END;
 		}
-		else if(player.isActive = true) {
+		else {
 			player.update();
 			objects.update();
+			
+			if(player.finishedLevel == true){
+				currentState = currentState + 1;
+				player.finishedLevel = false;
+				
+				if(currentState == 2) {
+					zombieSpawn.stop();
+					objects.bushes.clear();
+					objects.zombies.clear();
+					player.x = 250;
+				    player.y = 700;
+					startGameLevelTwo();
+				    objects.addBushLevelTwo();
+					}
+				if(currentState == 3) {
+					objects.bushes.clear();
+					objects.zombies.clear();
+					zombieSpawn.stop();
+					startGameLevelThree();
+				    objects.addBushLevelThree();
+				    player.x = 250;
+				    player.y = 700;
+				    }
+				if(currentState == 4) {
+					objects.bushes.clear();
+					objects.zombies.clear();
+					zombieSpawn.stop();
+				    startGameLevelFour();
+				    objects.addBushLevelFour();
+				    player.x = 250;
+				    player.y = 700;
+				    }
+				if(currentState == 5) {
+					objects.bushes.clear();
+					objects.zombies.clear();
+					zombieSpawn.stop();
+			    	startGameLevelFive();
+			    	objects.addBushLevelFive();
+			    	player.x = 250;
+				    player.y = 700;
+				    }
+			}
 		}
 	}
 	void updateEnd() {
@@ -125,12 +172,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
 		}
 		
-		objects.draw(g);
-		
+		if(currentState == 1 || currentState == 2 || currentState == 3 || currentState == 4) {
+			objects.draw(g);
+		}
+		else if(currentState == 5) {
+			objects.draw(g);
+			objects.drawHospital(g);
+		}
 		
 	}
-	void drawEnd(Graphics g) {
+	void drawGameOver(Graphics g) {
 		g.setColor(Color.RED);
+		g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+	}
+	
+	void drawEnd(Graphics g) {
+		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
 	}
 
@@ -153,26 +210,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	void startGameLevelOne() {
-		zombieSpawn = new Timer(5000, objects);
-		zombieSpawn.start();
-	}
-		
-	void startGameLevelTwo() {
 		zombieSpawn = new Timer(3000, objects);
 		zombieSpawn.start();
 	}
 		
-	void startGameLevelThree() {
+	void startGameLevelTwo() {
 		zombieSpawn = new Timer(2000, objects);
 		zombieSpawn.start();
 	}
 		
-	void startGameLevelFour() {
+	void startGameLevelThree() {
 		zombieSpawn = new Timer(1000, objects);
 		zombieSpawn.start();
 	}
-	void startGameLevelFive() {
+		
+	void startGameLevelFour() {
 		zombieSpawn = new Timer(500, objects);
+		zombieSpawn.start();
+	}
+	void startGameLevelFive() {
+		zombieSpawn = new Timer(250, objects);
 		zombieSpawn.start();
 	}
 	
@@ -190,9 +247,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		    if (currentState == END) {
 		        currentState = MENU;
 		    } 
+		    
+		    if(currentState == GAMEOVER) {
+		    	currentState = MENU;
+		    }
+		    
 		    if(currentState == MENU) {
 		    	currentState++;
 		    }
+		    
+		    if(currentState == 1)  {
+				   startGameLevelOne();
+				   objects.addBushLevelOne();
+				    }
+			
+			
 		}
 		
 		 
@@ -212,62 +281,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			}
 			
 		}
-		
-		if(player.finishedLevel == true){
-			currentState = currentState + 1;
-			player.finishedLevel = false;
-		}
-		
-		if(currentState == 1)  {
-			   startGameLevelOne();
-			   objects.addBushLevelOne();
-			    }
-		else if(currentState == 2) {
-				zombieSpawn.stop();
-				objects.bushes.clear();
-				objects.zombies.clear();
-				player.x = 250;
-			    player.y = 700;
-				startGameLevelTwo();
-			    objects.addBushLevelTwo();
-			    
-			    
-				}
-		else if(currentState == 3) {
-				objects.bushes.clear();
-				objects.zombies.clear();
-				zombieSpawn.stop();
-				startGameLevelThree();
-			    objects.addBushLevelThree();
-			    player.x = 250;
-			    player.y = 700;
-			    }
-		else if(currentState == 4) {
-				objects.bushes.clear();
-				objects.zombies.clear();
-				zombieSpawn.stop();
-			    startGameLevelFour();
-			    objects.addBushLevelFour();
-			    player.x = 250;
-			    player.y = 700;
-			    }
-		else if(currentState == 5) {
-				objects.bushes.clear();
-				objects.zombies.clear();
-				zombieSpawn.stop();
-		    	startGameLevelFive();
-		    	objects.addBushLevelFive();
-		    	player.x = 250;
-			    player.y = 700;
-			    }
-			    
-		else if(currentState == END) {
-			    }
-		else if(currentState == MENU) {
-			    }
-		
-		
-		
+
 		if(currentState == END) {
 			zombieSpawn.stop();
 		}

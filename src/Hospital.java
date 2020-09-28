@@ -4,15 +4,15 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Vaccine extends GameObject{
+public class Hospital extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	
-	Vaccine(int x, int y, int width, int height){
+	Hospital(int x, int y, int width, int height){
 		super(x, y, width, height);
 		if(needImage) {
-			loadImage("bush.png");
+			loadImage("Hospital.png");
 		}
 	}
 	

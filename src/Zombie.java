@@ -11,7 +11,7 @@ public class Zombie extends GameObject{
 	
 	Zombie(int x, int y, int width, int height){
 		super(x, y, width, height);
-		speed = 1;
+		speed = 2;
 		if (needImage) {
 		    loadImage ("zombie.gif");
 		}
@@ -19,22 +19,43 @@ public class Zombie extends GameObject{
 	
 	void update() {
 		super.update();
-		if(Player.inBush == false) {
-			if(x < Player.px) {
+		if(GamePanel.currentState == 1 | GamePanel.currentState == 2 | GamePanel.currentState == 3 | GamePanel.currentState == 4) {
+			if(Player.inBush == false) {
+				if(x < Player.px) {
+					x += speed;
+				}
+				if(x > Player.px) {
+					x -= speed;
+				}
+				if(y < Player.py) {
+					y += speed;
+				}
+				if(y > Player.py){
+				y -= speed;
+				}
+			}
+			else if(Player.inBush == true){
 				x += speed;
 			}
-			if(x > Player.px) {
-				x -= speed;
-			}
-			if(y < Player.py) {
-				y += speed;
-			}
-			if(y > Player.py){
-				y -= speed;
-			}
 		}
-		else if(Player.inBush == true){
-			y += speed;
+		else if(GamePanel.currentState == 5) {
+			if(Player.inBush == false) {
+				if(x < Player.px) {
+					x += speed;
+				}
+				if(x > Player.px) {
+					x -= speed;
+				}
+				if(y < Player.py) {
+					y += speed;
+				}
+				if(y > Player.py){
+					y -= speed;
+				}
+			}
+			else if(Player.inBush == true){
+				x += speed;
+			}
 		}
 	}
 	

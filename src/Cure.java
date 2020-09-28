@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 
 public class Cure {
 	JFrame frame;
-	public static final int WIDTH = 800;
+	public static final int WIDTH = 1200;
 	public static final int HEIGHT = 1000;
 	GamePanel gamepanel;
 	
