@@ -46,11 +46,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	GamePanel(){
 		titleFont = new Font("Arial", Font.BOLD, 48);
     	titleFontTwo = new Font("Arial", Font.BOLD, 35);
-    	titleFontThree = new Font("Albertus", Font.PLAIN, 28);
-    	titleFontFour = new Font("Albertus", Font.PLAIN, 28);
+    	titleFontThree = new Font("Albertus", Font.BOLD, 28);
+    	titleFontFour = new Font("Albertus", Font.BOLD, 28);
     	
-    	endFont = new Font("Charlesworth", Font.PLAIN, 48);
-    	endFontTwo = new Font("Charlesworth", Font.PLAIN, 24);
+    	endFont = new Font("Charlesworth", Font.BOLD, 48);
+    	endFontTwo = new Font("Charlesworth", Font.BOLD, 24);
     	endFontThree = new Font("Heather", Font.BOLD, 30);
     	endFontFour = new Font("Heather", Font.BOLD, 48);
     	
@@ -164,7 +164,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.setColor(Color.WHITE);
 		g.drawString("Oh no! A virus has arrived—zombies are everywhere! To move around, use the", 10, 400);
 		g.drawString("arrowkeys. Bushes help you. Find and stand in them throughout each level to hide.", 10, 450);
-		g.drawString("Survive five levels of unforgiving zombie atacks, and find the hospital to cure the virus!", 10, 500);
+		g.drawString("Survive five levels of unforgiving zombie atacks, and find the hospital to cure", 10, 500);
+		g.drawString("the virus!", 500, 550);
 		
 		g.setFont(titleFontThree);
 		g.setColor(Color.WHITE);
@@ -222,7 +223,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		g.setFont(endFontTwo);
 		g.setColor(Color.BLUE);
-		g.drawString("The cure has been found.", 450, 400);
+		g.drawString("The cure has been found.", 425, 400);
 		
 		g.setFont(endFontTwo);
 		g.setColor(Color.BLUE);
