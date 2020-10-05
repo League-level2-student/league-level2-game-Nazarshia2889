@@ -30,12 +30,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     
     Font endFont;
     Font endFontTwo;
+    Font endFontThree;
+    Font endFontFour;
     
     Timer frameDraw;
     Timer zombieSpawn;
     
-    Player player = new Player(250, 700, 125, 125);
-    ObjectManager objects = new ObjectManager(player);
+    Player player;
+    ObjectManager objects;
     
     public static BufferedImage image;
     public static boolean needImage = true;
@@ -44,11 +46,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	GamePanel(){
 		titleFont = new Font("Arial", Font.BOLD, 48);
     	titleFontTwo = new Font("Arial", Font.BOLD, 35);
-    	titleFontThree = new Font("Arial", Font.PLAIN, 28);
-    	titleFontFour = new Font("Arial", Font.PLAIN, 28);
+    	titleFontThree = new Font("Albertus", Font.PLAIN, 28);
+    	titleFontFour = new Font("Albertus", Font.PLAIN, 28);
     	
-    	endFont = new Font("Arial", Font.PLAIN, 48);
-    	endFontTwo = new Font("Arial", Font.PLAIN, 24);
+    	endFont = new Font("Charlesworth", Font.PLAIN, 48);
+    	endFontTwo = new Font("Charlesworth", Font.PLAIN, 24);
+    	endFontThree = new Font("Heather", Font.BOLD, 30);
+    	endFontFour = new Font("Heather", Font.BOLD, 48);
     	
     	frameDraw = new Timer(1000/60, this);
     	frameDraw.restart();
@@ -83,10 +87,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	void updateLevels() {
-		if(player.isActive == false) {
-			currentState = END;
-		}
-		else {
+		System.out.println(player.isActive);
+		if(player.isActive == true){
 			player.update();
 			objects.update();
 			
@@ -131,6 +133,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 				    player.y = 700;
 				    }
 			}
+
 		}
 	}
 	void updateEnd() {
@@ -139,28 +142,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	//draws game states
 	void drawMenu(Graphics g) {
-		g.setColor(Color.WHITE);
+		g.setColor(Color.MAGENTA);
 		g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+		
+		if (gotImage) {
+			g.drawImage(image, 0, 0, Cure.WIDTH, Cure.HEIGHT, null);
+		} else {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+		}
 		
 		g.setFont(titleFont);
 		g.setColor(Color.RED);
-		g.drawString("CURE", 300, 100);
+		g.drawString("CURE", 450, 150);
 		
 		g.setFont(titleFontTwo);
-		g.setColor(Color.BLUE);
-		g.drawString("HOW TO PLAY:", 250, 200);
+		g.setColor(Color.WHITE);
+		g.drawString("HOW TO PLAY:", 400, 300);
 		
 		g.setFont(titleFontThree);
-		g.setColor(Color.BLUE);
-		g.drawString("Oh no! Zombies are coming!", 50, 400);
-		g.drawString("To move around, use the arrowkeys accordingly.", 50, 450);
-		g.drawString("Bushes can also help! Zombies will come after you,", 50, 500);
-		g.drawString("stand on the bushes to hide for them to go by without", 50, 550);
-		g.drawString("seeing you. Play through each level and find the cure", 50, 600);
-		g.drawString("to the zombie virus, and complete the game!", 50, 650);
+		g.setColor(Color.WHITE);
+		g.drawString("Oh no! A virus has arrived—zombies are everywhere! To move around, use the", 10, 400);
+		g.drawString("arrowkeys. Bushes help you. Find and stand in them throughout each level to hide.", 10, 450);
+		g.drawString("Survive five levels of unforgiving zombie atacks, and find the hospital to cure the virus!", 10, 500);
+		
 		g.setFont(titleFontThree);
-		g.setColor(Color.ORANGE);
-		g.drawString("Press ENTER to start", 80, 750);
+		g.setColor(Color.WHITE);
+		g.drawString("Press ENTER to start", 400, 750);
 	}
 	void drawLevels(Graphics g){
 		g.setColor(Color.GREEN);
@@ -184,11 +192,42 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	void drawGameOver(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+		
+		g.setFont(endFont);
+		g.setColor(Color.BLUE);
+		g.drawString("GAME OVER", 450, 200);
+		
+		g.setFont(endFontTwo);
+		g.setColor(Color.BLUE);
+		g.drawString("The zombies got you!", 450, 400);
+		
+		g.setFont(endFontThree);
+		g.setColor(Color.BLUE);
+		g.drawString("TIP: The longer you stall, the more zombies you will attract.", 100, 450);
+		g.drawString("Move Quickly!", 500, 500);
+		
+		g.setFont(endFontTwo);
+		g.setColor(Color.BLUE);
+		g.drawString("Press ENTER to play again", 425, 650);
+		
 	}
 	
 	void drawEnd(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, Cure.WIDTH, Cure.HEIGHT);
+		
+		g.setFont(endFontFour);
+		g.setColor(Color.BLUE);
+		g.drawString("You did it!", 450, 200);
+		
+		g.setFont(endFontTwo);
+		g.setColor(Color.BLUE);
+		g.drawString("The cure has been found.", 450, 400);
+		
+		g.setFont(endFontTwo);
+		g.setColor(Color.BLUE);
+		g.drawString("Press ENTER to play again", 425, 500);
+		
 	}
 
 	@Override
@@ -210,13 +249,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	void startGameLevelOne() {
-		zombieSpawn = new Timer(3000, objects);
+		player = new Player(250, 700, 125, 125);
+	    objects = new ObjectManager(player);
+		zombieSpawn = new Timer(3000, objects); 
 		zombieSpawn.start();
 	}
 		
 	void startGameLevelTwo() {
-		zombieSpawn = new Timer(2000, objects);
+		zombieSpawn = new Timer(1000, objects);
 		zombieSpawn.start();
+		
 	}
 		
 	void startGameLevelThree() {
@@ -244,27 +286,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-		    if (currentState == END) {
+			if(currentState == MENU) {
+		    	currentState++;
+		    }
+			else if(currentState == END) {
 		        currentState = MENU;
 		    } 
 		    
-		    if(currentState == GAMEOVER) {
+		    else if(currentState == GAMEOVER) {
 		    	currentState = MENU;
 		    }
-		    
-		    if(currentState == MENU) {
-		    	currentState++;
-		    }
-		    
+		   
 		    if(currentState == 1)  {
 				   startGameLevelOne();
 				   objects.addBushLevelOne();
 				    }
-			
-			
 		}
 		
-		 
 		
 		if(currentState == 1 || currentState == 2 || currentState == 3 || currentState == 4 || currentState == 5) {
 			if (e.getKeyCode()==KeyEvent.VK_UP) {
@@ -281,10 +319,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			}
 			
 		}
-
-		if(currentState == END) {
+		
+		if(currentState == END || currentState == GAMEOVER) {
 			zombieSpawn.stop();
 		}
+
 
 	}
 

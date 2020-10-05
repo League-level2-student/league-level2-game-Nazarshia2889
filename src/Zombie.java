@@ -11,7 +11,15 @@ public class Zombie extends GameObject{
 	
 	Zombie(int x, int y, int width, int height){
 		super(x, y, width, height);
-		speed = 2;
+		if(GamePanel.currentState == 1 | GamePanel.currentState == 2) {
+			speed = 2;
+		}
+		else if(GamePanel.currentState == 2 | GamePanel.currentState == 3) {
+			speed = 2.5;
+		}
+		else if(GamePanel.currentState == 4 | GamePanel.currentState == 5) {
+			speed = 4;
+		}
 		if (needImage) {
 		    loadImage ("zombie.gif");
 		}

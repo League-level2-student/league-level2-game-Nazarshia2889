@@ -16,20 +16,20 @@ public class ObjectManager implements ActionListener{
 	}
 	
 	void addBushLevelOne() {
-		bushes.add(new Bush(5, 100, 250, 150));
-		bushes.add(new Bush(5, 400, 250, 150));
-		bushes.add(new Bush(400, 100, 250, 150));
-		bushes.add(new Bush(400, 400, 250, 150));
+		bushes.add(new Bush(100, 100, 250, 150));
+		bushes.add(new Bush(100, 400, 250, 150));
+		bushes.add(new Bush(800, 100, 250, 150));
+		bushes.add(new Bush(800, 400, 250, 150));
 	}
 	void addBushLevelTwo() {
 		bushes.add(new Bush(200, 250, 250, 150));
 		bushes.add(new Bush(600, 250, 250, 150));
-		bushes.add(new Bush(400, 500, 250, 150));
+		bushes.add(new Bush(400, 600, 250, 150));
 			
 	}
 		
 	void addBushLevelThree() {
-		bushes.add(new Bush(200, 800, 250, 150));
+		bushes.add(new Bush(200, 600, 250, 150));
 		bushes.add(new Bush(600, 200, 250, 150));
 	}
 		
@@ -39,7 +39,7 @@ public class ObjectManager implements ActionListener{
 	}
 	
 	void addBushLevelFive() {
-		bushes.add(new Bush(400, 500, 250, 150));
+		bushes.add(new Bush(200, 600, 250, 150));
 	}
 	
 	
@@ -55,7 +55,6 @@ public class ObjectManager implements ActionListener{
 	
 	void update() {
 		checkCollision();
-		purgeObjects();
 		for(int i = 0;i<zombies.size();i++){
 			Zombie s = zombies.get(i);
 			s.update();
@@ -87,29 +86,12 @@ public class ObjectManager implements ActionListener{
 	}
 	
 	void drawHospital(Graphics g) {
-		hospital = new Hospital(200, -50, 300, 300);
+		hospital = new Hospital(475, -100, 500, 400);
 		hospital.draw(g);
 	}
 	
-	void purgeObjects() {
-		for(int i = 0;i<zombies.size();i++) {
-			Zombie s = zombies.get(i);
-			if(s.isActive == false) {
-				zombies.remove(s);
-			}
-		}
-		
-		for(int i = 0;i<bushes.size();i++) {
-			Bush s = bushes.get(i);
-			if(s.isActive == false) {
-				bushes.remove(s);
-			}
-		}
-	}
 	
-	void resetPlayer() {
-		player = null;
-	}
+	
 	
 	void checkCollision() {
 		for(int i = 0;i<zombies.size();i++) {

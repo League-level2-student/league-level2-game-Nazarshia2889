@@ -22,7 +22,7 @@ public class Player extends GameObject{
 	
 	Player(int x, int y, int width, int height){
 		super(x, y, width, height);
-		speed = 5;
+		speed = 7;
 		if(needImage) {
 			loadImage("pixil-frame-0.png");
 		}
@@ -40,6 +40,7 @@ public class Player extends GameObject{
 	
 	void update() {
 		super.update();
+		System.out.println("Updated");
 		px = x;
 		py = y;
 			if(up == true) {

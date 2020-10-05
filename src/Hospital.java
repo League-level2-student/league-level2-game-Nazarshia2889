@@ -12,7 +12,7 @@ public class Hospital extends GameObject{
 	Hospital(int x, int y, int width, int height){
 		super(x, y, width, height);
 		if(needImage) {
-			loadImage("Hospital.png");
+			loadImage("hospital.png");
 		}
 	}
 	
