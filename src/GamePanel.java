@@ -211,7 +211,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			g.setFont(titleFontThree);
 			g.setColor(Color.WHITE);
 			g.drawString("LEVEL FOUR", 900, 25);
-			g.drawString("Zombie Speed: 4", 900, 50);
+			g.drawString("Zombie Speed: 3", 900, 50);
 		}
 		else if(currentState == 5) {
 			g.setFont(titleFontThree);

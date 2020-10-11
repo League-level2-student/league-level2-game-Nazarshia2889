@@ -46,7 +46,7 @@ public class ObjectManager implements ActionListener{
 	
 	void addZombie() {
 		int plusMinus = random.nextInt(2);
-		int pixel = random.nextInt((300 - 70) + 1) + 50;
+		int pixel = random.nextInt((350 - 100) + 1) + 100;
 		if(GamePanel.currentState == 1 | GamePanel.currentState == 2 | GamePanel.currentState == 3 | GamePanel.currentState == 4) {
 			if(plusMinus == 0) {
 				zombies.add(new Zombie(player.px+pixel, 0, 100, 100));

@@ -17,9 +17,13 @@ public class Zombie extends GameObject{
 		else if(GamePanel.currentState == 2 | GamePanel.currentState == 3) {
 			speed = 2.5;
 		}
-		else if(GamePanel.currentState == 4 | GamePanel.currentState == 5) {
+		else if(GamePanel.currentState == 4) {
+			speed = 3;
+		}
+		else if(GamePanel.currentState == 5) {
 			speed = 4;
 		}
+
 		if (needImage) {
 		    loadImage ("zombie.gif");
 		}
