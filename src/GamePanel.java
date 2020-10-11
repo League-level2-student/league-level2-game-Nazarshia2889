@@ -164,7 +164,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.setColor(Color.WHITE);
 		g.drawString("Oh no! A virus has arrived—zombies are everywhere! To move around, use the", 10, 400);
 		g.drawString("arrowkeys. Bushes help you. Find and stand in them throughout each level to hide.", 10, 450);
-		g.drawString("Survive five levels of unforgiving zombie atacks, and find the hospital to cure", 10, 500);
+		g.drawString("Survive five levels of unforgiving zombie attacks, and find the hospital to cure", 10, 500);
 		g.drawString("the virus!", 500, 550);
 		
 		g.setFont(titleFontThree);
@@ -187,6 +187,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		else if(currentState == 5) {
 			objects.draw(g);
 			objects.drawHospital(g);
+		}
+		
+		if(currentState == 1) {
+			g.setFont(titleFontThree);
+			g.setColor(Color.WHITE);
+			g.drawString("LEVEL ONE", 900, 25);
+			g.drawString("Zombie Speed: 2", 900, 50);
+		}
+		else if(currentState == 2) {
+			g.setFont(titleFontThree);
+			g.setColor(Color.WHITE);
+			g.drawString("LEVEL TWO", 900, 25);
+			g.drawString("Zombie Speed: 2.5", 900, 50);
+		}
+		else if(currentState == 3) {
+			g.setFont(titleFontThree);
+			g.setColor(Color.WHITE);
+			g.drawString("LEVEL THREE", 900, 25);
+			g.drawString("Zombie Speed: 2.5", 900, 50);
+		}
+		else if(currentState == 4) {
+			g.setFont(titleFontThree);
+			g.setColor(Color.WHITE);
+			g.drawString("LEVEL FOUR", 900, 25);
+			g.drawString("Zombie Speed: 4", 900, 50);
+		}
+		else if(currentState == 5) {
+			g.setFont(titleFontThree);
+			g.setColor(Color.WHITE);
+			g.drawString("FINAL LEVEL—Get to the cure!", 750, 25);
+			g.drawString("Zombie Speed: 4", 900, 50);
 		}
 		
 	}
