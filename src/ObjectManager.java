@@ -11,6 +11,7 @@ public class ObjectManager implements ActionListener{
 	Random random = new Random();
 	Hospital hospital;
 	
+	
 	ObjectManager(Player player){
 		this.player = player;
 	}
@@ -44,8 +45,15 @@ public class ObjectManager implements ActionListener{
 	
 	
 	void addZombie() {
+		int plusMinus = random.nextInt(2);
+		int pixel = random.nextInt((300 - 70) + 1) + 50;
 		if(GamePanel.currentState == 1 | GamePanel.currentState == 2 | GamePanel.currentState == 3 | GamePanel.currentState == 4) {
-			zombies.add(new Zombie((random.nextInt(Cure.WIDTH)), 0, 100, 100));
+			if(plusMinus == 0) {
+				zombies.add(new Zombie(player.px+pixel, 0, 100, 100));
+			}
+			else if(plusMinus == 1) {
+				zombies.add(new Zombie(player.px-pixel, 0, 100, 100));
+			}
 		}
 		if(GamePanel.currentState == 5) {
 			zombies.add(new Zombie(0, random.nextInt(Cure.HEIGHT), 100, 100));
